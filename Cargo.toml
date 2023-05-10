@@ -4,11 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+anyhow = "1.0.71"
 serde = { version = "1.0.152", features = ["derive"] }
 serde_yaml = "0.9.17"
-serde-big-array = "0.5.1"
-rustdds = "0.7.11"
-ros2-client = "0.3.0"
-mio = "0.6.23"
-mio-extras = "2.0.6"
-serde_repr = "0.1.12"
+r2r = "0.7.0"
+futures = "0.3.28"

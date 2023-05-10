@@ -22,11 +22,9 @@ pins:
   - number: 25
     mode: analog_output
 
-  - number: 0
-    mode: analog_output
-
 node:
   node_name: esp32
   service_name: set_config
   publisher_name: read_pins
   subcriber_name: write_pins
+  refresh_rate_ms: 500
