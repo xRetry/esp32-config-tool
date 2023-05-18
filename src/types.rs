@@ -8,7 +8,7 @@ pub struct PinSetting {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct FileContent {
-    pub target_topic: String,
+    pub target_topic: Option<String>,
     pub read_only: bool,
     pub pins: Vec<PinSetting>,
 }
