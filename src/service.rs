@@ -31,7 +31,7 @@ pub async fn send_config(file: String, target: Option<String>) {
         "The target topic needs to be set in the config file or the command line!"
     ));
 
-    println!("{:?}", request);
+    //println!("{:?}", request);
 
     let ctx = r2r::Context::create().unwrap();
     let mut node = r2r::Node::create(ctx, "esp32_config_tool", "").unwrap();
@@ -39,7 +39,7 @@ pub async fn send_config(file: String, target: Option<String>) {
 
     let task = tokio::task::spawn(async move {
         if let Ok(resp) = client.request(&request).unwrap().await {
-            println!("{:?}", resp);
+            println!("{{\n\t\"pin_modes\":\t{:?},\n\t\"pin_errors\":\t{:?}\n}}", resp.pin_modes, resp.pin_errors);
         }
     });
 

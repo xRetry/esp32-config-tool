@@ -15,10 +15,6 @@ use clap::{Parser, command, Subcommand};
 #[command(name = "ESP32 Config Tool")]
 #[command(version = "1.0")]
 struct Args {
-    /// Topic name of the target ROS2-node (overwrites target in config file)
-    #[clap(long, short)]
-    target: Option<String>,
-
     #[command(subcommand)]
     command: Command,
 }
@@ -29,20 +25,29 @@ enum Command {
     Set {
         /// Path to a YAML config file
         file: String,
+        /// Topic name of the target ROS2-node (overwrites target in config file)
+        #[clap(long, short)]
+        target: Option<String>,
     },
     /// Prints the pin values published by the microcontroller to stdout
-    Read,
+    Read {
+        /// Topic name of the target ROS2-node
+        target: String,
+    },
     /// Send values to the microcontroller
-    Write, // TODO: Implement
+    Write {
+        /// Topic name of the target ROS2-node
+        target: String,
+    }
 }
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Args::parse();
     match args.command {
-        Command::Set { file } => send_config(file, args.target).await,
-        Command::Read => receive_pins(args.target).await,
-        Command::Write => send_pins(args.target).await
+        Command::Set { file, target } => send_config(file, target).await,
+        Command::Read { target } => receive_pins(target).await,
+        Command::Write { target } => send_pins(target).await
     };
 
     Ok(())

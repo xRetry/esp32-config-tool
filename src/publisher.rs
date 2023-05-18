@@ -1,11 +1,7 @@
 use r2r::QosProfile;
 use r2r::ros2_esp32_interfaces::msg::PinValues;
 
-pub async fn send_pins(target: Option<String>) {
-    let target = target.expect(
-        "The target topic needs to be provided via commandline using --target <TARGET> or -t <TARGET>"
-    );
-
+pub async fn send_pins(target: String) {
     let ctx = r2r::Context::create().unwrap();
     let mut node = r2r::Node::create(ctx, "esp32_config_tool", "").unwrap();
     let duration = std::time::Duration::from_millis(2500);
