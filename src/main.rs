@@ -47,7 +47,7 @@ async fn main() -> Result<()> {
     match args.command {
         Command::Set { file, target } => send_config(file, target).await,
         Command::Read { target } => receive_pins(target).await,
-        Command::Write { target } => send_pins(target).await
+        Command::Write { target } => send_pins(target)
     };
 
     Ok(())

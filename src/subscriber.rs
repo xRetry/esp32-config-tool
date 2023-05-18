@@ -7,7 +7,7 @@ pub async fn receive_pins(target: String) {
     let ctx = r2r::Context::create().unwrap();
     let mut node = r2r::Node::create(ctx, "esp32_config_tool", "").unwrap();
 
-    let sub = node.subscribe::<PinValues>(&target, QosProfile::default()).unwrap();
+    let sub = node.subscribe::<PinValues>(&target, QosProfile::default().best_effort()).unwrap();
 
     let _ = tokio::task::spawn(async move {
         println!(">>> Start listening to {}...", target);
