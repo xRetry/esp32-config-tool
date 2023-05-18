@@ -1,14 +1,5 @@
-change_pins: true
-change_transport: false
-change_node: false
-
-transport:
-  use_wifi: true
-  agent_ip: 10.0.0.36
-  agent_port: 8888
-  wifi_ssid: ssid_name
-  wifi_password: password
-
+target_topic: /esp32_set_config
+read_only: false
 pins:
   - number: 26
     mode: digital_input
@@ -22,9 +13,3 @@ pins:
   - number: 25
     mode: analog_output
 
-node:
-  node_name: esp32
-  service_name: set_config
-  publisher_name: read_pins
-  subcriber_name: write_pins
-  refresh_rate_ms: 500
