@@ -2,19 +2,19 @@
 <?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="2">
   <name>esp32_config_tool</name>
-  <version>0.0.1</version>
-  <description>Examples of a minimal r2r node</description>
-  <maintainer email="marco.schwarz@stud.unileoben.ac.at">Marco Schwarz</maintainer>
+  <version>1.0.0</version>
+  <description>Configuration tool for the ROS2-ESP32 Interface</description>
+  <maintainer email="marcoschwarz.at@gmail.com">Marco Schwarz</maintainer>
   <license>MIT</license>
   <author>Marco Schwarz</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <build_depend>rcl</build_depend>
-  <build_depend>ros2_esp32_interfaces</build_depend>
+  <build_depend>ros2_esp32_messages</build_depend>
 
   <exec_depend>rcl</exec_depend>
-  <exec_depend>ros2_esp32_interfaces</exec_depend>
+  <exec_depend>ros2_esp32_messages</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

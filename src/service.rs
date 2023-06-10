@@ -1,4 +1,4 @@
-use r2r::ros2_esp32_interfaces::srv::SetConfig;
+use r2r::ros2_esp32_messages::srv::SetConfig;
 use anyhow::{Result, anyhow};
 use crate::types::FileContent;
 

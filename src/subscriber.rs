@@ -1,7 +1,7 @@
 use futures::future;
 use futures::stream::StreamExt;
 use r2r::QosProfile;
-use r2r::ros2_esp32_interfaces::msg::PinValues;
+use r2r::ros2_esp32_messages::msg::PinValues;
 
 pub async fn receive_pins(target: String) {
     let ctx = r2r::Context::create().unwrap();

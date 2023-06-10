@@ -1,5 +1,5 @@
 use r2r::QosProfile;
-use r2r::ros2_esp32_interfaces::msg::PinValues;
+use r2r::ros2_esp32_messages::msg::PinValues;
 
 pub fn send_pins(target: String) {
     let ctx = r2r::Context::create().unwrap();
