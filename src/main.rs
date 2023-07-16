@@ -1,11 +1,9 @@
 mod service;
 mod subscriber;
-mod publisher;
 mod types;
 
 use service::send_config;
 use subscriber::receive_pins;
-use publisher::send_pins;
 use anyhow::Result;
 use clap::{Parser, command, Subcommand};
 
@@ -30,15 +28,10 @@ enum Command {
         target: Option<String>,
     },
     /// Prints the pin values published by the microcontroller to stdout
-    Read {
+    Echo {
         /// Topic name of the target ROS2-node
         target: String,
     },
-    /// Send values to the microcontroller
-    Write {
-        /// Topic name of the target ROS2-node
-        target: String,
-    }
 }
 
 #[tokio::main]
@@ -46,8 +39,7 @@ async fn main() -> Result<()> {
     let args = Args::parse();
     match args.command {
         Command::Set { file, target } => send_config(file, target).await,
-        Command::Read { target } => receive_pins(target).await,
-        Command::Write { target } => send_pins(target)
+        Command::Echo { target } => receive_pins(target).await,
     };
 
     Ok(())

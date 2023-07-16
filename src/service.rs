@@ -2,7 +2,7 @@ use r2r::ros2_esp32_messages::srv::SetConfig;
 use anyhow::{Result, anyhow};
 use crate::types::FileContent;
 
-fn content_to_request(file_content: &FileContent) -> Result<SetConfig::Request> {
+fn file_to_request(file_content: &FileContent) -> Result<SetConfig::Request> {
     let mut pin_modes = [0; 40];
     for p in &file_content.pins {
         pin_modes[p.number as usize] = match p.mode.as_str() {
@@ -25,11 +25,7 @@ pub async fn send_config(file: String, target: Option<String>) {
     let reader = std::fs::File::open(file).expect("Unable to open file");
     let file_content: FileContent = serde_yaml::from_reader(reader).expect("Unable to parse file");
 
-    let request = content_to_request(&file_content).unwrap();
-    //let request = SetConfig::Request{
-    //    read_only: false,
-    //    pin_modes: vec![3; 40],
-    //};
+    let request = file_to_request(&file_content).unwrap();
 
     let target = target.unwrap_or(file_content.target_topic.expect(
         "The target topic needs to be set in the config file or the command line!"
