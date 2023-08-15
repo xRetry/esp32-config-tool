@@ -2,14 +2,14 @@ target_topic: /esp32_set_config
 read_only: false
 pins:
   - number: 26
-    mode: digital_input
+    mode: 1
 
   - number: 14
-    mode: digital_output
+    mode: 2
 
   - number: 33
-    mode: analog_input
+    mode: 3
 
   - number: 25
-    mode: analog_output
+    mode: 4
 

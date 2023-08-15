@@ -2,7 +2,7 @@ mod service;
 mod subscriber;
 mod types;
 
-use service::send_config;
+use service::{set_config, get_config};
 use subscriber::receive_pins;
 use anyhow::Result;
 use clap::{Parser, command, Subcommand};
@@ -19,17 +19,23 @@ struct Args {
 
 #[derive(Subcommand, Debug)]
 enum Command {
-    /// Change the config on a microcontroller
+    /// Change the pin config of the microcontroller
     Set {
         /// Path to a YAML config file
         file: String,
-        /// Topic name of the target ROS2-node (overwrites target in config file)
+        /// The service topic name of the targeted ROS2-ESP32 Interface (overwrites target in
+        /// config file)
         #[clap(long, short)]
         target: Option<String>,
     },
-    /// Prints the pin values published by the microcontroller to stdout
+    /// Get the currently active pin config of the microcontroller
+    Get {
+        /// The service topic name of the targeted ROS2-ESP32 Interface
+        target: String,
+    },
+    /// Print the pin values published by the microcontroller to the console
     Echo {
-        /// Topic name of the target ROS2-node
+        /// The publisher topic name of the targeted ROS2-ESP32 Interface
         target: String,
     },
 }
@@ -38,7 +44,8 @@ enum Command {
 async fn main() -> Result<()> {
     let args = Args::parse();
     match args.command {
-        Command::Set { file, target } => send_config(file, target).await,
+        Command::Set { file, target } => set_config(file, target).await,
+        Command::Get { target } => get_config(target).await,
         Command::Echo { target } => receive_pins(target).await,
     };
 
